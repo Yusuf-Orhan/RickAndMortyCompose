@@ -40,7 +40,7 @@ fun DetailScreen(
         )
         Card (modifier = Modifier
             .fillMaxWidth()
-            .padding(start = 14.dp, end = 14.dp)
+            .padding(start = 14.dp, end = 14.dp,top = 14.dp)
         ){
             Text(
                 text = viewModel.character?.name ?: "",
@@ -62,7 +62,7 @@ fun DetailScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 10.dp, top = 10.dp),
-                text = "Type : \t ${viewModel.character?.type ?: "Nullable"}",
+                text = "Species : ${viewModel.character?.species ?: "Nullable"}",
                 fontSize = 18.sp
             )
             Text(
@@ -75,7 +75,7 @@ fun DetailScreen(
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = 10.dp, top = 10.dp),
+                    .padding(start = 10.dp, top = 10.dp, bottom = 10.dp),
                 text = "Status : \t ${viewModel.character?.status}",
                 fontSize = 18.sp
             )

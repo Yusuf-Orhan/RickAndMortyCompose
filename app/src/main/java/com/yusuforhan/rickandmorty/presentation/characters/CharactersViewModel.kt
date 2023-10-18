@@ -1,5 +1,6 @@
 package com.yusuforhan.rickandmorty.presentation.characters
 
+import android.accounts.NetworkErrorException
 import androidx.compose.runtime.*
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -15,8 +16,13 @@ class CharactersViewModel @Inject constructor(
 ): ViewModel() {
     var characters by  mutableStateOf<List<Result>>(listOf())
     fun getCharacters(){
-        viewModelScope.launch {
-            characters = repo.getCharacters().results
+        try {
+            viewModelScope.launch {
+                characters = repo.getCharacters().results
+            }
+        }catch (e : Exception){
+            println("Error : ${e.message}")
         }
+
     }
 }
