@@ -17,6 +17,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -48,11 +49,20 @@ fun CharacterScreen(controller: NavController,viewModel: CharactersViewModel = h
 
     Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally){
         viewModel.getCharacters()
-        LazyColumn{
-            items(viewModel.characters){result ->
-                CharacterListItem(result = result, imageUrl = result.imageUrl ,controller)
+        if (viewModel.isLoading){
+            CircularProgressIndicator()
+        }else if (viewModel.isErrorMessage.isNotEmpty()){
+            Column (verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally){
+                Text(text = viewModel.isErrorMessage)
+            }
+        } else if (viewModel.characters.isNotEmpty()){
+            LazyColumn{
+                items(viewModel.characters){result ->
+                    CharacterListItem(result = result, imageUrl = result.imageUrl ,controller)
+                }
             }
         }
+
     }
 }
 @OptIn(ExperimentalMaterial3Api::class)
