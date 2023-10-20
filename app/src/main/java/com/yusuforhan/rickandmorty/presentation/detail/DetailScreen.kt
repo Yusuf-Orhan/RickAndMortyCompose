@@ -30,7 +30,7 @@ fun DetailScreen(
     viewModel: DetailViewModel = hiltViewModel()
 ){
     Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center){
-        viewModel.getDetail()
+        viewModel.getDetail(id)
         Image(
             painter = rememberAsyncImagePainter(model = viewModel.character?.imageUrl),
             contentDescription = "Character Image",

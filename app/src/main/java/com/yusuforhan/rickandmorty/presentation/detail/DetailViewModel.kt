@@ -16,9 +16,9 @@ class DetailViewModel @Inject constructor(
 
     var character by mutableStateOf<Result?>(null)
 
-    fun getDetail() : Result? {
+    fun getDetail(id : Int) : Result? {
         viewModelScope.launch {
-            character = repo.getCharacterDetail()
+            character = repo.getCharacterDetail(id)
         }
         return character
     }

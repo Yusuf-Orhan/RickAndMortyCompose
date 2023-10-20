@@ -3,7 +3,6 @@ package com.yusuforhan.rickandmorty.data.repository
 
 import android.accounts.NetworkErrorException
 import androidx.compose.runtime.*
-import com.yusuforhan.rickandmorty.data.model.Characters
 import com.yusuforhan.rickandmorty.data.model.Result
 import com.yusuforhan.rickandmorty.data.remote.CharacterApi
 import com.yusuforhan.rickandmorty.utils.Resource
@@ -20,12 +19,12 @@ class DataRepository @Inject constructor(private val api : CharacterApi) {
         }catch (e : IOError){
             return Resource.Error("Io Error")
         }catch (e : Exception){
-            return Resource.Error("Other Error")
+            return Resource.Error("${e.message}")
         }
 
         return Resource.Success(result)
     }
-    suspend fun getCharacterDetail() : Result{
-        return api.getCharacter()
+    suspend fun getCharacterDetail(id : Int) : Result{
+        return api.getCharacter(id)
     }
 }
